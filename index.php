@@ -4,6 +4,14 @@ include "includes/koneksi.php";
 
 require 'fungsi.php';
 
+session_start();
+
+  // Cek apakah user sudah login atau belum
+  if (!isset($_SESSION['login']) || !$_SESSION['login']) {
+        header('Location: login.php');
+        exit;
+      }
+
   if ( isset($_POST["btnTambah"]) ) {
     
       // cek apakah data berhasil di tambah atau tidak
@@ -41,7 +49,7 @@ $result = $koneksi->query($rows);
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>Data User || Latihan 19</title>
+    <title>Data User || Latihan 19 & 20</title>
     <style type="text/css">
     	.avatar{
     		width: auto;
@@ -50,6 +58,15 @@ $result = $koneksi->query($rows);
     </style>
   </head>
   <body>
+    <nav class="navbar navbar-dark  bg-primary">
+      <div class="container">
+        <a href="index.php" class="navbar-brand">HOME</a>
+        <a href="logout.php" class="navbar-brand"> Logout </a>
+      </div>
+    </nav>
+   
+
+
    <div class="container" style="margin-top: 30px; margin-bottom: 30px; padding-top: 5px;">
    	<h3 style="text-align: center;">Data Pengguna</h3>
    	 <form action="tambah.php" method="POST" style="text-align: right;">
